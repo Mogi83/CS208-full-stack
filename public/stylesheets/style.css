@@ -1,8 +1,133 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  display: flex;
+  justify-content: center;
+  margin: 0;
 }
 
-a {
-  color: #00B7FF;
+.main-container {
+  background: #fff;
+  width: 500px;
+  min-height: 600px;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 0; 
+  overflow: hidden;
+}
+
+h1, .welcome-msg {
+  padding-left: 60px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0;
+}
+
+.row-spacer {
+  height: 30px;
+  width: 100%;
+}
+
+.notepad-paper {
+  flex-grow: 1;
+  width: 100%;
+  background-image: linear-gradient(transparent 29px, #bec0e8 1px);
+  background-size: 100% 30px;
+}
+
+ol, h2, .add-task-form {
+  padding-left: 60px; 
+  margin: 0;
+}
+
+li {
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.main-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 45px;
+  height: 100%; width: 2px;
+  background: #ffadad;
+  z-index: 10;
+}
+
+.footer-section {
+  padding: 20px 20px 20px 60px;
+  background: #fff;
+  border-top: 2px solid #ddd;
+}
+
+.task-edit-input {
+  flex-grow: 1;
+  margin-left: 10px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  height: 24px;
+  outline: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.task-edit-input:focus {
+  background: rgba(235, 245, 255, 0.5);
+  border-bottom: 1px dashed #00B7FF;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.delete-btn:hover {
+  color: #ffadad;
+}
+
+.task-wrapper {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.task-edit-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  height: 24px;
+  outline: none;
+  color: #333;
+}
+
+.task-wrapper.completed-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(76, 175, 80, 0.7);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.task-edit-input.completed {
+  color: #aaa;
 }

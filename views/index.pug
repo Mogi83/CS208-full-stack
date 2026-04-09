@@ -1,23 +1,65 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  ol
-  each val in todos
-    li
-      span= val.task + ' - '
-      if val.completed > 0
-        span Completed
-      else
-        span Not Completed
-      form(method='POST' action='/delete')
-        input(type='hidden', name='id', value=val.id)
-        button(type='submit') Delete
+  .main-container 
+    h1= title
+    p.welcome-msg Welcome to #{title}
+    
+    .notepad-paper
+      .row-spacer
+      ol
+        each val in todos
+          li
+            label.switch
+              input(
+                type='checkbox' 
+                id=`check-${val.id}`
+                checked=(val.completed > 0) 
+                onchange=`updateStatus(${val.id}, this.checked)`
+              )
+              span.slider
+            
+            .task-wrapper
+              input.task-edit-input(
+                type='text' 
+                value=val.task 
+                onblur=`updateTaskName(${val.id}, this.value)`
+                class=(val.completed > 0 ? 'completed' : '')
+                spellcheck="false"
+              )
+            
+            form(method='POST' action='/delete' style='display:inline;')
+              input(type='hidden', name='id', value=val.id)
+              button.delete-btn(type='submit') x
+    
+    .footer-section
+      h2 Add a new task
+      form(method='POST' action='/create')
+        label(for='task') Task: 
+        input(type='text', name='task', id='task', required, pattern='.*\\S.*')
+        button(type='submit') Create Task  
 
-  hr
-  h2 Add a new task
-  form(method='POST' action='/create')
-    label(for='task') Task:
-    input(type='text', name='task', id='task', required)
-    button(type='submit') Create Task
+  script.
+    function updateStatus(id, isChecked) {
+      const value = isChecked ? 1 : 0;
+      const checkbox = document.querySelector(`#check-${id}`);
+      const row = checkbox.closest('li');
+      const wrapper = row.querySelector('.task-wrapper');
+      const input = row.querySelector('.task-edit-input');
+      
+      if (isChecked) {
+        wrapper.classList.add('completed-wrapper');
+        input.classList.add('completed');
+      } else {
+        wrapper.classList.remove('completed-wrapper');
+        input.classList.remove('completed');
+      }
+
+      fetch('/update-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id, completed: value })
+      }).then(response => {
+        if (!response.ok) alert('Error saving status');
+      });
+    }
