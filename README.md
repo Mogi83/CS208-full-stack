@@ -1,11 +1,35 @@
-# CS208 Full Stack Final Project
+# CS208 Full Stack Lab 12.03
 
 ## Documentation
 
 - Running the example project is documented [here](docs/example_project.md)
 - An example README is provided [here](docs/README_example.md)
 
-Students must **replace** this README with a README that is specific to your
-project. **IMPORTANT**: If you do not complete the README, your project will not
-be graded, and you will receive a zero. The TA will not guess how to set up,
-configure, and run your project.
+## Create the Database Tables
+
+Create the initial tables by running the following command:
+
+```bash
+sudo mysql -u root -p < ./setup_scripts/create_demo_table.sql
+```
+
+## Install Dependencies
+
+Install the required dependencies using npm:
+
+```bash
+npm install
+```
+
+## Run the Application
+
+Start the application using the following command:
+
+```bash
+npm start
+```
+
+## Access the Application
+
+On Codespaces, you can access the application by forwarding port 3000. Open the
+forwarded port in your browser to view the application, or if running locally navigate to `http://{your local ip}:3000`.
