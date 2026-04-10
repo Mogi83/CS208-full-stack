@@ -3,7 +3,6 @@
 ## Documentation
 
 - Running the example project is documented [here](docs/example_project.md)
-- An example README is provided [here](docs/README_example.md)
 
 ## Create the Database Tables
 
